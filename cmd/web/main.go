@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
-	"web-hello-world-v2/pkg/config"
 
+	"github.com/colinpeacock1/go-course/pkg/config"
 	"github.com/colinpeacock1/go-course/pkg/handlers"
+	"github.com/colinpeacock1/go-course/pkg/render"
 )
 
 const portNumber = ":8080"
@@ -15,8 +17,20 @@ func main() {
 
 	tc, err := render.CreateTemplateCache()
 
-	http.HandleFunc("/", handlers.Home)
-	http.HandleFunc("/about", handlers.About)
+	if err != nil {
+		log.Fatal("cannot create template cache")
+	}
+
+	app.TemplateCache = tc
+	app.UseCache = false
+
+	repo := handlers.NewRepo(&app)
+	handlers.NewHandlers(repo)
+
+	render.NewTemplate(&app)
+
+	http.HandleFunc("/", handlers.Repo.Home)
+	http.HandleFunc("/about", handlers.Repo.About)
 
 	fmt.Println(fmt.Sprintf("Starting application on port %s", portNumber))
 	_ = http.ListenAndServe(portNumber, nil)
