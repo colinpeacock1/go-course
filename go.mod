@@ -1,4 +1,4 @@
-module github.com/colinpeacock1/go-course
+module github.com/colinpeacock1/bookings
 
 go 1.16
 

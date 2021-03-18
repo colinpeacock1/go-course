@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/colinpeacock1/go-course/pkg/config"
-	"github.com/colinpeacock1/go-course/pkg/models"
-	"github.com/colinpeacock1/go-course/pkg/render"
+	"github.com/colinpeacock1/bookings/pkg/config"
+	"github.com/colinpeacock1/bookings/pkg/models"
+	"github.com/colinpeacock1/bookings/pkg/render"
 )
 
 // Repo the repository used by the handlers
